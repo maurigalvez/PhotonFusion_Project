@@ -10,6 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6440516347053703955}
   - component: {fileID: 4525786501161686649}
+  - component: {fileID: 1492756058642969936}
+  - component: {fileID: 8136204839575168109}
+  - component: {fileID: 327014905313992541}
+  - component: {fileID: 8667409814679823332}
+  - component: {fileID: 6048032325330160127}
   m_Layer: 0
   m_Name: Networked Player PF
   m_TagString: Untagged
@@ -60,6 +65,81 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1492756058642969936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394371823419107408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3996331fd5087468d264ff4b8944be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8136204839575168109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394371823419107408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1621592271
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1492756058642969936}
+  - {fileID: 327014905313992541}
+  - {fileID: 6048032325330160127}
+--- !u!114 &327014905313992541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394371823419107408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b5f0ebc9c79084fa73d4b35a16a612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: -20
+  jumpImpulse: 8
+  acceleration: 50
+  braking: 30
+  maxSpeed: 6
+  rotationSpeed: 80
+  viewUpDownRotationSpeed: 60
+--- !u!114 &8667409814679823332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394371823419107408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777a51400aa9236429dadee1fad98134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6048032325330160127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394371823419107408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a46a0c307c11749b2f85dba020315a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7042106064327785349
 GameObject:
   m_ObjectHideFlags: 0
