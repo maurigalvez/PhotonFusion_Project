@@ -12,5 +12,11 @@ namespace Utilities
         {
             return new Vector3(Random.Range(-WorldArea, WorldArea), WorldHeight, Random.Range(-WorldArea, WorldArea));
         }
+
+        public static void SetRenderLayerInChildren(Transform parent, int layerNumber)
+        {
+            foreach(var childTransform in parent.GetComponentsInChildren<Transform>(true))
+                childTransform.gameObject.layer = layerNumber;
+        }
     }
 }
