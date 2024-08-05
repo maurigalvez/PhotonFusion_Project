@@ -11,7 +11,7 @@ namespace Network
     public struct NetworkInputData : INetworkInput
     {
         public Vector2 MovementInput;   /// Which direction is the character moving? Only X,Y
-        public float RotationInput;     /// Which direction is the character looking at? Only Y Axis
+        public Vector3 AimForwardVector; /// Replaced rotation for this, as this will be used for aiming later
         public NetworkBool IsJumpPressed;
     }
 }

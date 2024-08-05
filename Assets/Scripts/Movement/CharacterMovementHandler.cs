@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using Fusion.Custom;
+using Utilities;
 namespace Movement
 {
     using Network;
+
     [RequireComponent(typeof(Fusion.Custom.NetworkCharacterController))]
     public class CharacterMovementHandler : NetworkBehaviour
     {
         private Fusion.Custom.NetworkCharacterController m_NetworkCharacterController;
         private Transform m_CharacterTransform;
-        private Vector2 m_ViewInput;
-        private float m_CameraRotationX = 0;
         private Camera m_LocalPlayerCamera;
         private const float MAX_CAMERA_ROTATION = 90f;
-
-        public void SetViewInputVector(Vector2 viewInput)
-        {
-            m_ViewInput = viewInput;
-        }
+        private const float FALL_HEIGHT_THRESHOLD = -12f;
 
         private void Awake()
         {
@@ -28,21 +24,21 @@ namespace Movement
             m_LocalPlayerCamera = GetComponentInChildren<Camera>();
         }
 
-        private void Update()
-        {
-            m_CameraRotationX += Mathf.Clamp(m_ViewInput.y * Time.deltaTime * m_NetworkCharacterController.viewUpDownRotationSpeed, -MAX_CAMERA_ROTATION, MAX_CAMERA_ROTATION);
-            m_LocalPlayerCamera.transform.localRotation = Quaternion.Euler(m_CameraRotationX, 0, 0);
-        }
-
         public override void FixedUpdateNetwork()
         {
             if(GetInput(out NetworkInputData networkInputData))
             {
                 // Rotate the view
-                m_NetworkCharacterController.Rotate(networkInputData.RotationInput);
+                ///m_NetworkCharacterController.Rotate(networkInputData.RotationInput);
+                m_CharacterTransform.forward = networkInputData.AimForwardVector;   /// This might be yarring, and might need some lerping depending on the case
+
+                /// Cancel out rotation on X
+                var rotationEuler = m_CharacterTransform.rotation.eulerAngles;
+                rotationEuler.x = 0;
+                m_CharacterTransform.rotation = Quaternion.Euler(rotationEuler);
 
                 // Move player over network
-                Vector3 moveDirection = m_CharacterTransform.forward * networkInputData.MovementInput.y 
+                var moveDirection = m_CharacterTransform.forward * networkInputData.MovementInput.y 
                                       + m_CharacterTransform.right * networkInputData.MovementInput.x;
 
                 moveDirection.Normalize();
@@ -51,7 +47,15 @@ namespace Movement
                 // Jump
                 if (networkInputData.IsJumpPressed)
                     m_NetworkCharacterController.Jump();
+
+                CheckFailRespawn();
             }
+        }
+
+        private void CheckFailRespawn()
+        {
+            if (m_CharacterTransform.position.y < FALL_HEIGHT_THRESHOLD)
+                m_CharacterTransform.position = Utils.GetRandomSpawnPoint();
         }
     }
 }

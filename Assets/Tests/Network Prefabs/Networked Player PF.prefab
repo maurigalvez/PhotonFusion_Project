@@ -37,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 6189606704948990109}
   - {fileID: 1618044713006148905}
+  - {fileID: 61013152114737156}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &4525786501161686649
@@ -141,6 +142,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a46a0c307c11749b2f85dba020315a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7019990472699075699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 61013152114737156}
+  m_Layer: 0
+  m_Name: Camera Anchor Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &61013152114737156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7019990472699075699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.48300004, z: 0.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6440516347053703955}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7042106064327785349
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +185,7 @@ GameObject:
   - component: {fileID: 5210830852698808337}
   - component: {fileID: 5916334861476455226}
   - component: {fileID: 1311795552765089765}
+  - component: {fileID: 1669010994486607886}
   m_Layer: 0
   m_Name: FPS Camera
   m_TagString: Untagged
@@ -278,6 +311,19 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1669010994486607886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7042106064327785349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f308b86bcca919f4c95500d26764f2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CameraAnchorPoint: {fileID: 61013152114737156}
 --- !u!1001 &7946859804039634339
 PrefabInstance:
   m_ObjectHideFlags: 0

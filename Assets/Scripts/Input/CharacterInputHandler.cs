@@ -1,3 +1,4 @@
+using CameraLogic;
 using Movement;
 using Network;
 using System.Collections;
@@ -11,11 +12,11 @@ namespace InputControls
         private Vector2 m_MoveInputVector = Vector2.zero;
         private Vector2 m_ViewInputVector = Vector2.zero;
         private bool m_IsJumpButtonPressed = false;
-        private CharacterMovementHandler m_MovementHandler;
+        private LocalCameraHandler m_LocalCameraHandler;
 
         private void Awake()
         {
-            m_MovementHandler = GetComponent<CharacterMovementHandler>();
+            m_LocalCameraHandler = GetComponentInChildren<LocalCameraHandler>();
         }
 
         private void Start()
@@ -30,23 +31,29 @@ namespace InputControls
             m_ViewInputVector.x = Input.GetAxis("Mouse X");
             m_ViewInputVector.y = Input.GetAxis("Mouse Y") * -1; // Invert mouse look
 
-            m_MovementHandler.SetViewInputVector(m_ViewInputVector);
+            m_LocalCameraHandler.SetViewInputVector(m_ViewInputVector);
 
             // Movement input
             m_MoveInputVector.x = Input.GetAxis("Horizontal");
             m_MoveInputVector.y = Input.GetAxis("Vertical");
-
-            m_IsJumpButtonPressed = Input.GetButtonDown("Jump");
+            
+            // We only set to true and reset in GetNetworkInput() so network has a chance to read the value of the var
+            // and send it to other players.
+            if(Input.GetButtonDown("Jump"))
+                m_IsJumpButtonPressed = true;
         }
 
         public NetworkInputData GetNetworkInput()
         {
-            return new()
+            NetworkInputData networkInput = new()
             {
-                RotationInput = m_ViewInputVector.x,
+                AimForwardVector = m_LocalCameraHandler.transform.forward,
                 MovementInput = m_MoveInputVector,
                 IsJumpPressed = m_IsJumpButtonPressed
             };
+            // Reset now that it's been read by others
+            m_IsJumpButtonPressed = false;
+            return networkInput;
         }
     }
 }
